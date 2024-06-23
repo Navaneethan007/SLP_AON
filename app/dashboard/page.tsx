@@ -1,6 +1,7 @@
 'use client'
 import React from 'react';
 import Image from 'next/image';
+import { BarChart, DoughnutChart, HorizontalBarChart, PieChart } from '@/components/chartsComponent';
 import './dashboard.css';
 import AONLogo from '../../public/AON_logo.svg';
 import addOnLogo from '../../public/addOn.svg';
@@ -9,24 +10,21 @@ import buyingLogo from '../../public/buying.svg';
 import commerceLogo from '../../public/commerce-automation.svg';
 import contractLogo from '../../public/contract-management.svg';
 import userIcon from '../../public/userIcon.svg';
-import { BarChart, DoughnutChart, PieChart } from '@/components/chartsComponent';
-
-const data1 = [{ name: 'A', value: 100 }, { name: 'B', value: 300 }];
-const data2 = [{ name: 'Jan', value: 400 }, { name: 'Feb', value: 300 }, { name: 'Mar', value: 200 }];
-const data3 = [{ name: 'Total', value: 750 }];
-const data4 = [{ name: 'Approved', value: 850 }, { name: 'Rejected', value: 150 }];
-const data5 = [{ name: 'Surveys Available', value: 52 }, { name: 'Surveys Attended', value: 7 }];
-const data6 = [{ name: 'Qualified', value: 350 }, { name: 'Disqualified', value: 150 }];
+import lineChart from '../../public/line-chart.svg';
+import pyramidChart from '../../public/pyramid-chart.svg';
+import panelSetupSvg from '../../public/panel-setup.svg';
+import logoutSvg from '../../public/logout.svg';
+import Link from 'next/link';
 
 const Dashboard: React.FC = () => {
     return (
         <div className="dashboard">
             <div className="topBar">
-                <Image src={AONLogo} alt="SAP AON" />
-
-                <h1>Dashboard</h1>
-
-                <div className="search">
+                <div className='flex items-center justify-center'>
+                    <Image src={AONLogo} alt="SAP AON" />
+                    <h1>Dashboard</h1>
+                </div>
+                <div className="search flex items-center justify-center">
                     <input type="text" placeholder="Search..." />
                     <Image src={userIcon} alt="Account" />
                 </div>
@@ -34,20 +32,27 @@ const Dashboard: React.FC = () => {
             <div className="container">
                 <nav className="nav">
                     <ul>
-                        <li className="active"><a href="#"><Image src={addOnLogo} alt="SLP ADDON" width={20} /> SLP ADDON</a></li>
+                        <li className="active"><Link href={'/addon'}><Image src={addOnLogo} alt="SLP ADDON" width={20} /> SLP ADDON</Link></li>
                         <li><a href="#"><Image src={sourcingLogo} alt="SOURCING" width={20} /> SOURCING</a></li>
                         <li><a href="#"><Image src={buyingLogo} alt="BUYING & INVOICING" width={20} /> BUYING & INVOICING</a></li>
                         <li><a href="#"><Image src={commerceLogo} alt="COMMERCE AUTOMATION" width={20} /> COMMERCE AUTOMATION</a></li>
                         <li><a href="#"><Image src={contractLogo} alt="CONTRACT MANAGEMENTS" width={20} /> CONTRACT MANAGEMENTS</a></li>
                     </ul>
-                    <div className="adminSetup"><a href="#">ADMIN PANEL SET UP</a></div>
-                    <div className="logout"><a href="#">Logout</a></div>
+                    <div className="nav-action adminSetup text-xs">
+                        <Image src={panelSetupSvg} alt="admin icon" />
+                        <a href="#">ADMIN PANEL SET UP</a></div>
+                    <div className="nav-action logout">
+                        <Image src={logoutSvg} alt="admin icon" />
+                        <a href="#">Logout</a>
+                    </div>
                 </nav>
                 <main className="main">
                     <section className="cardSection">
                         <div className="smallCard">
-                            <Image src={addOnLogo} alt="SLP ADDON" />
-                            <h3>SLP ADDON</h3>
+                            <Link href={'/addon'}>
+                                <Image src={addOnLogo} alt="SLP ADDON" />
+                                <h3>SLP ADDON</h3>
+                            </Link>
                         </div>
                         <div className="smallCard">
 
@@ -85,7 +90,7 @@ const Dashboard: React.FC = () => {
                             </div>
                             <div className='desc'>
                                 <p>Search by dates to know validation of approved and rejected</p>
-                                <a href='/'>More Info</a>
+                                <Link href={'/addon'}>More Info</Link>
                             </div>
                         </div>
                         <div className="bigCard">
@@ -123,7 +128,9 @@ const Dashboard: React.FC = () => {
                         <div className="bigCard">
                             <div><h3>Supplier Qualification</h3></div>
                             <div className='graphSection'>
-                                <div className='graph'></div>
+                                <div className='graph py-7'>
+                                    <Image src={pyramidChart} alt="pyramid chart" />
+                                </div>
                                 <div className='graphContent'>
                                     <p>Total No.of Qulaified</p>
                                     <span>350</span>
@@ -138,7 +145,9 @@ const Dashboard: React.FC = () => {
                         <div className="bigCard">
                             <div><h3>Supplier Integration</h3></div>
                             <div className='graphSection'>
-                                <div className='graph'></div>
+                                <div className='graph my-5'>
+                                    <Image src={lineChart} alt="line chart" />
+                                </div>
                                 <div className='graphContent'>
                                     <p>Overall performance of suppliers</p>
                                 </div>
@@ -150,7 +159,9 @@ const Dashboard: React.FC = () => {
                         <div className="bigCard">
                             <div><h3>Rescan</h3></div>
                             <div className='graphSection'>
-                                <div className='graph'></div>
+                                <div className='graph'>
+                                    <HorizontalBarChart />
+                                </div>
                                 <div className='graphContent'>
                                     <p>Total Approved</p>
                                     <span>450</span>

@@ -1,11 +1,12 @@
 .dashboard {
     position: relative;
-    width: 100%;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .topBar {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     background-color: #ffffff;
@@ -28,27 +29,27 @@
     color: #000;
 }
 
-.search {
-    margin-left: 60%;
-    width: 366px;
-    Height: 35px;
-    Top: 33px;
-    Border: 1px;
+.search{
+    margin: 0 30px;
+}
+
+.search input {
+    width: 360px;
+    border: 1px solid #DBDBDB;
+    border-radius: 6px;
+    height: 35px;
+    padding-left: 40px;
+    margin: 0 30px;
+    background: url('../../public/search.svg') no-repeat 10px;
 }
 
 .container {
     display: flex;
-    width: 100%;
-    height: 100%;
 }
 
 .nav {
     background-color: #ffffff;
-    color: #000000;
-    height: 100vh;
     padding-top: 20px;
-    position: sticky;
-    top: 0;
 }
 
 .nav ul {
@@ -76,29 +77,18 @@
     margin-right: 10px;
 }
 
-.adminSetup,
-.logout {
-    color: #000000;
-    margin-top: 20px;
-    text-align: center;
+.nav .nav-action{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: calc(100% - 350px);
+    color: #717070;
+    margin: 20px 0;
 }
 
-.adminSetup {
-    position: absolute;
-    bottom: 60px;
-    width: 100%;
-}
-
-.logout {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-}
-
-.adminSetup a,
-.logout a {
-    color: #000000;
-    text-decoration: none;
+.nav .nav-action img{
+    margin: 0 10px;
 }
 
 .main {
