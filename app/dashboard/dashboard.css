@@ -1,0 +1,193 @@
+.dashboard {
+    position: relative;
+    width: 100%;
+}
+
+.topBar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    width: 100%;
+    height: 105px;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+}
+
+.topBar h1 {
+    margin-left: 9%;
+}
+
+.dashboardname {
+    text-align: left;
+    left: 900px;
+    margin: 40px 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: #000;
+}
+
+.search {
+    margin-left: 60%;
+    width: 366px;
+    Height: 35px;
+    Top: 33px;
+    Border: 1px;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.nav {
+    background-color: #ffffff;
+    color: #000000;
+    height: 100vh;
+    padding-top: 20px;
+    position: sticky;
+    top: 0;
+}
+
+.nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav ul li {
+    margin: 20px;
+}
+
+.nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.nav ul li a {
+    color: #000000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.nav ul li a img {
+    margin-right: 10px;
+}
+
+.adminSetup,
+.logout {
+    color: #000000;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.adminSetup {
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+}
+
+.logout {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+
+.adminSetup a,
+.logout a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+    background-color: #F3F2F2;
+}
+
+.cardSection {
+    display: flex;
+    justify-content: space-around;
+    background-color: #F3F2F2;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.smallCard {
+    width: 178px;
+    height: 136px;
+    border-radius: 8px;
+    background-color: #83838321;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.smallCard img {
+    margin-bottom: 15px;
+}
+
+.todo {
+    text-align: left;
+    font-size: 20px;
+    color: #717070;
+    margin-left: 40px;
+}
+
+.todoSection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.bigCard {
+    width: 325px;
+    height: 270px;
+    margin: 10px 0;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    font-size: 12px;
+    color: #717070;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.bigCard .graphSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.bigCard .graphSection .graph{
+    width: 150px;
+    height: 120px;
+}
+
+.bigCard .graphSection .graphContent{
+    text-align: center;
+}
+
+.bigCard .graphSection .graphContent span{
+    font-size: 24px;
+    margin: 0 20px;
+}
+
+.bigCard .desc a{
+    position: absolute;
+    right: 30px;
+    bottom: 25px;
+}

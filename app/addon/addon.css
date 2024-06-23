@@ -1,0 +1,198 @@
+.addOnContainer{
+    height: 100%;
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #CAD4E2;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    align-items: flex-end;
+    padding: 10px;
+    color: #717070;
+    font-size: 12px;
+}
+
+.date div {
+    margin: 5px;
+}
+
+.detailsCard {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.detailsCard .card {
+    width: 240px;
+    height: 150px;
+    font-size: 12px;
+    text-align: center;
+    background-color: #83838321;
+    border-radius: 8px;
+    margin: 30px;
+}
+
+.detailsCard .card div:nth-child(1) {
+    position: relative;
+    top: 40px;
+}
+
+.detailsCard .card div:nth-child(2) {
+    position: relative;
+    top: 70px;
+    font-weight: 600;
+}
+
+.detailsCard .graph {
+    width: 448px;
+    height: 250px;
+    background-color: #83838321;
+    border-radius: 8px;
+    opacity: 0px;
+    margin: 10px 30px;
+}
+
+.content {
+    background-color: #F3F2F2;
+}
+
+.detailsCard .total {
+    color: #0298EC;
+}
+
+.detailsCard .approved {
+    color: #30B401;
+}
+
+.detailsCard .rejected {
+    color: #B40C01;
+}
+
+/* Date Picker */
+
+.datePickerContainer {
+    display: inline-flex;
+    align-items: center;
+}
+
+.datePickerContainer .MuiStack-root {
+    padding-top: 0;
+    margin: 0;
+}
+
+.datePickerContainer .MuiFormControl-root {
+    min-width: 100px;
+}
+
+.datePickerContainer .MuiInputBase-input {
+    font-size: 12px;
+    width: 70px;
+    height: 0px;
+    padding: 15px 5px;
+}
+
+.datePickerContainer .MuiButtonBase-root {
+    width: 20px;
+}
+
+.datePickerContainer .MuiButtonBase-root svg {
+    width: 20px;
+    height: 20px;
+}
+
+.supplierGridContainer {
+    background-color: #fff;
+    height: calc(100% - 470px);
+    margin: 30px;
+}
+
+.supplierGridContainer .supplierGrid{
+    height: calc(100% - 40px);
+    overflow-y: auto;
+}
+
+.supplierGridContainer .filterContiner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.supplierGridContainer .searchInput {
+    background-image: url('../../public/search.svg');
+    background-position: 10px;
+    background-repeat: no-repeat;
+    padding-left: 35px;
+    border: 1px solid #DBDBDB;
+    border-radius: 6px;
+    height: 30px;
+    width: 385px;
+    margin: 15px;
+}
+
+.supplierGridContainer .sortBtn {
+    border: 1px solid#CAD4E2;
+    width: 120px;
+    border-radius: 6px;
+    height: 25px;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 15px;
+}
+
+.supplierGridContainer .filterCount {
+    width: 15px;
+    height: 15px;
+    border-radius: 12px;
+    background-color: #0298EC;
+    color: #fff;
+    font-size: 12px;
+    line-height: 15px;
+}
+
+.supplierGridContainer .statusFilter {
+    margin: 0 30px 0 10px;
+}
+
+.supplierGridContainer .statusFilter label {
+    margin: 0 10px 0 20px;
+    font-size: 12px;
+    color: #717070;
+    cursor: pointer;
+}
+
+.supplierGridContainer .statusFilter input {
+    position: relative;
+    top: 4px;
+    cursor: pointer;
+}
+
+.supplierGridContainer .gridHeader {
+    display: flex;
+    justify-content: space-around;
+}
+
+.supplierGridContainer thead input[type="checkbox"] {
+    position: relative;
+    top: 3px;
+    margin-right: 5px;
+}
+
+.supplierGridContainer table tbody tr td {
+    font-size: 12px;
+    color: #717070;
+}
+
+.submitBtn button{
+    position: relative;
+    left: calc(100% - 160px);
+    padding: 10px 30px;
+    background: #DBDBDB;
+    border-radius: 6px;
+    margin: 10px 0;
+}
