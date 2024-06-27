@@ -14,6 +14,8 @@ import lineChart from '../../public/line-chart.svg';
 import pyramidChart from '../../public/pyramid-chart.svg';
 import panelSetupSvg from '../../public/panel-setup.svg';
 import logoutSvg from '../../public/logout.svg';
+import hBarChart from '../../public/hbar-chart.svg';
+import vBarChart from '../../public/vbar-chart.svg';
 import Link from 'next/link';
 
 const Dashboard: React.FC = () => {
@@ -40,7 +42,7 @@ const Dashboard: React.FC = () => {
                     </ul>
                     <div className="nav-action adminSetup text-xs">
                         <Image src={panelSetupSvg} alt="admin icon" />
-                        <a href="#">ADMIN PANEL SET UP</a></div>
+                        <a href="/admin">ADMIN PANEL SET UP</a></div>
                     <div className="nav-action logout">
                         <Image src={logoutSvg} alt="admin icon" />
                         <a href="#">Logout</a>
@@ -90,14 +92,15 @@ const Dashboard: React.FC = () => {
                             </div>
                             <div className='desc'>
                                 <p>Search by dates to know validation of approved and rejected</p>
-                                <Link href={'/addon'}>More Info</Link>
+                                <Link href={'/addon?type=request'}>More Info</Link>
                             </div>
                         </div>
                         <div className="bigCard">
                             <div><h3>Supplier Registration</h3></div>
                             <div className='graphSection'>
                                 <div className='graph'>
-                                    <BarChart />
+                                    {/* <BarChart /> */}
+                                    <Image src={vBarChart} alt="bar chart" />
                                 </div>
                                 <div className='graphContent'>
                                     <p>Total No.of Supplier Registration</p>
@@ -105,7 +108,7 @@ const Dashboard: React.FC = () => {
                                 </div>
                             </div>
                             <div className='desc'>
-                                <a href='/'>More Info</a>
+                                <a href='/addon?type=registration'>More Info</a>
                             </div>
                         </div>
                         <div className="bigCard">
@@ -160,7 +163,8 @@ const Dashboard: React.FC = () => {
                             <div><h3>Rescan</h3></div>
                             <div className='graphSection'>
                                 <div className='graph'>
-                                    <HorizontalBarChart />
+                                    {/* <HorizontalBarChart /> */}
+                                    <Image src={hBarChart} alt="bar chart" />
                                 </div>
                                 <div className='graphContent'>
                                     <p>Total Approved</p>

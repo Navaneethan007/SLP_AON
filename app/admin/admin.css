@@ -1,0 +1,251 @@
+/* styles/Home.module.css */
+.admin-container .admin-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.admin-container .header {
+    width: 100%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.admin-container .homeIcon {
+    width: 24px;
+    height: 24px;
+    margin: 15px 30px;
+}
+
+.admin-container .title {
+    text-align: left;
+    font-size: 14px;
+    color: #5A5A5A;
+    margin: 20px;
+    font-weight: 500;
+}
+
+.admin-container .mainBox {
+    display: flex;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.admin-container .slp-config-container {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-right: 10px;
+}
+
+.admin-container .leftBox {
+    height: 90px;
+    border: 1px solid #CAD4E2;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.admin-container .rightColumn {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.admin-container .rightBox {
+    height: 90px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.admin-container .tabs {
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+    margin: 0 30px;
+}
+
+.admin-container .tab {
+    text-align: center;
+    cursor: pointer;
+    margin: 0 35px;
+    height: 30px;
+    align-self: flex-end;
+}
+
+.admin-container .tab.active {
+    border-bottom: 4px solid #0298EC;
+}
+
+.admin-container .formBox {
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 190px);
+    overflow: auto;
+}
+
+.admin-container .searchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.admin-container .searchBox {
+    padding: 10px 40px;
+    margin-right: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex-grow: 1;
+    width: 100%;
+    background: url('../../public/search.svg') no-repeat 20px;
+}
+
+.admin-container .searchBoxWithImage {
+    width: 400px;
+}
+
+.admin-container .searchIcon {
+    margin-left: -30px;
+    margin-right: 10px;
+}
+
+.admin-container .configText {
+    white-space: nowrap;
+    color: #0298EC;
+    background-color: #F3F2F2;
+    padding: 5px;
+}
+
+.admin-container .form {
+    display: flex;
+    flex-direction: column;
+    color: #0298EC;
+}
+
+.admin-container .formGroup {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.admin-container .formGroup label {
+    width: 250px;
+    margin-right: 10px;
+}
+
+.admin-container .formGroup input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    color: #000;
+    border-radius: 4px;
+    width: 50%;
+    /* Decrease width of the input boxes */
+}
+
+.admin-container .formGroup input.default {
+    background-color: #CAD4E2;
+    /* Different color for the first input box */
+}
+
+.admin-container .saveButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    /* Align save button to the right */
+    margin-top: 20px;
+}
+
+.admin-container .saveButton {
+    padding: 10px;
+    background-color: #0298EC;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100px;
+    position: fixed;
+    bottom: 55px;
+}
+
+
+.admin-container .slp-config {
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+}
+
+.admin-container .slp-config img {
+    margin: 0 40px;
+}
+
+.admin-container .configuration-items {
+    margin: 0px 0 0 65px;
+    border-left: 3px solid #CAD4E2;
+}
+
+.admin-container .configuration-items .config {
+    padding: 20px 40px;
+    margin: 30px 0;
+    color: #717070;
+}
+
+.admin-container .configuration-items .config.active {
+    background-color: #CAD4E26B;
+    border-left: 9px solid #0298EC;
+    border-radius: 0 6px 6px 0;
+    color: #0298EC;
+}
+
+.MuiBox-root:has(.confirm-dialog){
+    border-radius: 6px;
+    border: none;
+}
+
+.confirm-dialog {
+    height: 150px;
+}
+
+.confirm-dialog .title {
+    color: #5A5A5A;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.confirm-dialog .footer {
+    position: relative;
+    top: 70px;
+    left: 130px;
+    margin: 10px 0;
+}
+
+.confirm-dialog .content {
+    font-size: 12px;
+    color: #B8B7B7;
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+.confirm-dialog .cancel-btn {
+    background-color: #97979736;
+    padding: 5px 10px;
+    margin: 0 30px;
+    width: 75px;
+    border-radius: 6px;
+}
+
+.confirm-dialog .save-btn {
+    padding: 5px 10px;
+    color: #fff;
+    border-radius: 6px;
+    width: 70px;
+    background-color: #0298EC;
+}

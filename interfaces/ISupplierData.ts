@@ -1,4 +1,7 @@
-interface SupplierData {
+interface ISupplierData {
+    documentId: string;
+    taskID: string;
+    dateCreated: string;
     dateModified: string;
     suppliedId: string;
     supplierName: string;
@@ -8,5 +11,5 @@ interface SupplierData {
     buyerDept: string;
     type: string;
     status: string;
-    feedback: string;
+    feedback: boolean;
 }

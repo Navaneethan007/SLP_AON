@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { SupplierGrid } from "@/components/supplierGrid";
 import Image from "next/image";
-import calendarSvg from '../public/calendar.svg';
+import { useSearchParams } from 'next/navigation';
 import dayjs, { Dayjs } from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -20,6 +20,7 @@ import {
 import { Bar } from 'react-chartjs-2';
 import './addon.css';
 import AONLogo from '../../public/AON_logo.svg';
+import { SupplierRequestMapper } from "@/utils/supplierRequestMapper";
 
 ChartJS.register(
     CategoryScale,
@@ -45,9 +46,12 @@ export const options = {
 
 
 export default function Home() {
+    const searchParams = useSearchParams();
+    const type = searchParams.get('type') || "registration";
     const [fromDate, setFromDate] = React.useState<Dayjs | null>(null);
     const [toDate, setToDate] = React.useState<Dayjs | null>(null);
     const labels = ['Date', '', '', '', ''];
+    const [data, setData] = useState<ISupplierData[]>([]);
     const chartData = {
         labels,
         datasets: [
@@ -64,117 +68,11 @@ export default function Home() {
         ],
     };
 
-    let data: SupplierData[] = [{
-        dateModified: new Date().toLocaleDateString(),
-        suppliedId: "SCAS001",
-        supplierName: "firstName lastName",
-        commodity: "BG",
-        buyerName: "Buyer1",
-        buyerDept: "Raw",
-        type: "Rescan",
-        status: "Selected",
-        feedback: "View Report",
-        region: "CHI"
-    }, {
-        dateModified: new Date().toLocaleDateString(),
-        suppliedId: "SCAS001",
-        supplierName: "firstName lastName",
-        commodity: "BG",
-        buyerName: "Buyer1",
-        buyerDept: "Raw",
-        type: "Rescan",
-        status: "Rejected",
-        feedback: "Error",
-        region: "CHI"
-    }, {
-        dateModified: new Date().toLocaleDateString(),
-        suppliedId: "SCAS001",
-        supplierName: "firstName lastName",
-        commodity: "BG",
-        buyerName: "Buyer1",
-        buyerDept: "Raw",
-        type: "Rescan",
-        status: "Selected",
-        feedback: "View Report",
-        region: "CHI"
-    }, {
-        dateModified: new Date().toLocaleDateString(),
-        suppliedId: "SCAS001",
-        supplierName: "firstName lastName",
-        commodity: "BG",
-        buyerName: "Buyer1",
-        buyerDept: "Raw",
-        type: "Rescan",
-        status: "Rejected",
-        feedback: "Error",
-        region: "CHI"
-    }, {
-        dateModified: new Date().toLocaleDateString(),
-        suppliedId: "SCAS001",
-        supplierName: "firstName lastName",
-        commodity: "BG",
-        buyerName: "Buyer1",
-        buyerDept: "Raw",
-        type: "Rescan",
-        status: "Selected",
-        feedback: "View Report",
-        region: "CHI"
-    }, {
-        dateModified: new Date().toLocaleDateString(),
-        suppliedId: "SCAS001",
-        supplierName: "firstName lastName",
-        commodity: "BG",
-        buyerName: "Buyer1",
-        buyerDept: "Raw",
-        type: "Rescan",
-        status: "Rejected",
-        feedback: "Error",
-        region: "CHI"
-    }, {
-        dateModified: new Date().toLocaleDateString(),
-        suppliedId: "SCAS001",
-        supplierName: "firstName lastName",
-        commodity: "BG",
-        buyerName: "Buyer1",
-        buyerDept: "Raw",
-        type: "Rescan",
-        status: "Selected",
-        feedback: "View Report",
-        region: "CHI"
-    }, {
-        dateModified: new Date().toLocaleDateString(),
-        suppliedId: "SCAS001",
-        supplierName: "firstName lastName",
-        commodity: "BG",
-        buyerName: "Buyer1",
-        buyerDept: "Raw",
-        type: "Rescan",
-        status: "Rejected",
-        feedback: "Error",
-        region: "CHI"
-    }, {
-        dateModified: new Date().toLocaleDateString(),
-        suppliedId: "SCAS001",
-        supplierName: "firstName lastName",
-        commodity: "BG",
-        buyerName: "Buyer1",
-        buyerDept: "Raw",
-        type: "Rescan",
-        status: "Selected",
-        feedback: "View Report",
-        region: "CHI"
-    }, {
-        dateModified: new Date().toLocaleDateString(),
-        suppliedId: "SCAS001",
-        supplierName: "firstName lastName",
-        commodity: "BG",
-        buyerName: "Buyer1",
-        buyerDept: "Raw",
-        type: "Rescan",
-        status: "Rejected",
-        feedback: "Error",
-        region: "CHI"
-    }];
+    React.useEffect(() => {
+        fetch('https://aonapi.azurewebsites.net/SupplierApprovalRequest/GetAllSupplierApprovalRequest')
+            .then((res) => res.json())
+            .then((d) => setData(SupplierRequestMapper(d)));
+    }, []);
 
     return (
         <div className="addOnContainer">
@@ -224,7 +122,7 @@ export default function Home() {
                     <Bar options={options} data={chartData} />
                 </div>
             </div>
-            <SupplierGrid supplierData={data} />
+            <SupplierGrid supplierData={data} gridType={type} />
             <div className="submitBtn">
                 <button>Sumbit</button>
             </div>

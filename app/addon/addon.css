@@ -1,4 +1,4 @@
-.addOnContainer{
+.addOnContainer {
     height: 100%;
 }
 
@@ -111,7 +111,7 @@
     margin: 30px;
 }
 
-.supplierGridContainer .supplierGrid{
+.supplierGridContainer .supplierGrid {
     height: calc(100% - 40px);
     overflow-y: auto;
 }
@@ -188,11 +188,88 @@
     color: #717070;
 }
 
-.submitBtn button{
+.submitBtn button {
     position: relative;
     left: calc(100% - 160px);
     padding: 10px 30px;
     background: #DBDBDB;
     border-radius: 6px;
     margin: 10px 0;
+}
+
+.supplierGrid .rejected {
+    color: #B40C01;
+}
+
+.supplierGrid .approved {
+    color: #30B401;
+}
+
+
+
+/* Error Modal */
+
+.errorReviewModal {
+    width: 100%;
+}
+
+.MuiModal-root .css-1wnsr1i:has(> .errorReviewModal) {
+    width: 90% !important;
+    border: none !important;
+    border-radius: 8px;
+    outline: none;
+}
+
+.errorReviewModal .title{
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.errorReviewModal .title img{
+    cursor: pointer;
+}
+
+.errorReviewModal table textarea{
+    width: 250px;
+    height: 96px;
+    background: #EEEEEE;
+    border-radius: 6px;
+    outline: none;
+    padding: 10px;
+}
+
+.errorReviewModal .footer{
+    position: relative;
+}
+
+.errorReviewModal button{
+    margin: 10px 20px;
+    border-radius: 6px;
+    position: relative;
+    left: 78%;
+    height: 40px;
+    width: 100px;
+    background: #DBDBDB;
+}
+
+.errorReviewModal button:nth-child(1){
+    background: white;
+    border: 1px solid #5A5A5A;
+}
+
+.errorReviewModal .errorText{
+    color: #FF0202;
+}
+
+.errorReviewModal .errorText div{
+    margin: 5px 0;
+}
+
+.errorReviewModal .errorText span{
+    color: #5A5A5A;
+    font-weight: 500;
+    margin: 5px 0;
 }
