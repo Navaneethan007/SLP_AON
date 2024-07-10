@@ -124,7 +124,7 @@ export default function Home() {
             </div>
             <SupplierGrid supplierData={data} gridType={type} />
             <div className="submitBtn">
-                <button>Sumbit</button>
+                <button>Submit</button>
             </div>
         </div>
     );

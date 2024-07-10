@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import './admin.css';
 import aonLogo from '../../public/AON_logo.svg';
 import settingIcon from '../../public/settings.svg';
@@ -31,7 +31,8 @@ const AdminPanel: React.FC = () => {
         ARIBA_Taskdetails_URL: '',
         ARIBA_Taskdetails_APIKey: ''
     });
-    const [isSubmit, setISumbit] = useState(false);
+    const [isSubmit, setIsSubmit] = useState(false);
+    const [requestData, setRequestData] = useState<IAdminPanelRequest>();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -42,10 +43,57 @@ const AdminPanel: React.FC = () => {
     };
 
     const submitForm = () => {
-        setISumbit(true);
-        console.log(formData);
+        setIsSubmit(true);
     }
 
+    const confirmSubmit = () => {
+        let request = requestData;
+        if (!request) return;
+
+        request.ariba_APIKey = formData.ARIBA_APIKey;
+        request.ariba_Host = formData.ARIBA_Host;
+        request.ariba_User = formData.ARIBA_User;
+        request.ariba_Realm = formData.ARIBA_Realm;
+        request.ariba_Password = formData.ARIBA_PasswordAdapter;
+        request.ariba_APIKey = formData.ARIBA_APIKey;
+        request.ariba_Token_API_URL = formData.ARIBA_Token_API_URL;
+        request.ariba_PendingApprovables_URL = formData.ARIBA_PendingApprovables_URL;
+        request.ariba_TaskDetails_URL = formData.ARIBA_Taskdetails_URL;
+        request.ariba_Get_Token_Authorisation_Token = formData.ARIBA_Taskdetails_APIKey;
+        fetch('https://aonapi.azurewebsites.net/AONServiceSettings/UpdateAONServiceSettings', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(request)
+        }).then(() => {
+            console.log("AON Service Settings updated");
+            setIsSubmit(false);
+        })
+            .catch(() => console.error("Failed to update AON Service Settings"))
+    }
+
+    const mapFormData = (data: IAdminPanelRequest) => {
+        let formValues: FormData = {
+            ARIBA_Host: data.ariba_Host,
+            ARIBA_Realm: data.ariba_Realm,
+            ARIBA_User: data.ariba_User,
+            ARIBA_PasswordAdapter: data.ariba_Password,
+            ARIBA_APIKey: data.ariba_APIKey,
+            ARIBA_Token_API_URL: data.ariba_Token_API_URL,
+            ARIBA_PendingApprovables_URL: data.ariba_PendingApprovables_URL,
+            ARIBA_Taskdetails_URL: data.ariba_TaskDetails_URL,
+            ARIBA_Taskdetails_APIKey: data.ariba_Get_Token_Authorisation_Token
+        };
+        setFormData(formValues);
+    }
+
+    useEffect(() => {
+        fetch('https://aonapi.azurewebsites.net/AONServiceSettings/GetAONServiceSettings?client=1')
+            .then((res) => res.json())
+            .then((data) => {
+                setRequestData(data as IAdminPanelRequest);
+                mapFormData(data);
+            })
+    }, []);
 
     const ConfimationModal: React.FC = () => {
         return (
@@ -53,8 +101,8 @@ const AdminPanel: React.FC = () => {
                 <div className='title'>Save changes</div>
                 <div className='content'>Are you sure you want save your changes?</div>
                 <div className='footer'>
-                    <button className='cancel-btn' onClick={() => { setISumbit(false) }}>Cancel</button>
-                    <button className='save-btn'>Save</button>
+                    <button className='cancel-btn' onClick={() => { setIsSubmit(false) }}>Cancel</button>
+                    <button className='save-btn' onClick={() => confirmSubmit()}>Save</button>
                 </div>
             </div>
         )
@@ -93,7 +141,7 @@ const AdminPanel: React.FC = () => {
                             </div>
                         </div>
                         <div className="formBox">
-                            <div className="searchContainer">
+                            {/* <div className="searchContainer">
                                 <div className="searchBoxWithImage">
                                     <input
                                         type="text"
@@ -104,7 +152,7 @@ const AdminPanel: React.FC = () => {
                                 <span className="configText">
                                     Configuration valid for https://Lorem ipsum dolor sit amet
                                 </span>
-                            </div>
+                            </div> */}
                             <form className="form">
                                 {Object.keys(formData).map((key, index) => (
                                     <div key={key} className="formGroup">
@@ -128,7 +176,7 @@ const AdminPanel: React.FC = () => {
                     </div>
                 </div >
             </div >
-            {isSubmit && <ModalDialog content={<ConfimationModal />} toggleModal={setISumbit} />}
+            {isSubmit && <ModalDialog content={<ConfimationModal />} toggleModal={setIsSubmit} />}
         </>
     );
 };

@@ -92,12 +92,12 @@ export const SupplierGrid: React.FC<{ supplierData: ISupplierData[], gridType: s
                             <td className="px-3 py-3">
                                 {data.dateCreated}
                             </td>
-                            <td className="px-3 py-3">
+                            {status !== "request" && <td className="px-3 py-3">
                                 {data.suppliedId}
-                            </td>
-                            {status !== "request" && <td scope="row" className="px-3 py-3">
-                                {data.supplierName}
                             </td>}
+                            <td scope="row" className="px-3 py-3">
+                                {data.supplierName}
+                            </td>
                             <td className="px-3 py-3">
                                 {data.commodity}
                             </td>

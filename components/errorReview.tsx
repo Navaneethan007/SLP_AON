@@ -14,13 +14,15 @@ export const ErrorReview: React.FC<{ errorData: ISupplierErrorData | undefined, 
     const [showError, setShowError] = React.useState(false);
     const requestData: IVerificationReportRequest[] = [];
 
-    const submitResponse = () => {
-        requestData.map((req) => {
-            fetch('https://aonapi.azurewebsites.net/VerificationReport/ApproveDenyVerificationReport', {
+    const submitResponse = async () => {
+        await requestData.map((req) => {
+            fetch(`https://aonapi.azurewebsites.net/VerificationReport/ApproveDenyVerificationReport?id=${req.id}&approvalComments=${req.approvalComments}&IsApproved=${req.IsApproved}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(req)
-            }).then(() => console.log("Verification Report Request updated successfully"))
+                headers: { 'Content-Type': 'application/json' }
+            }).then(() => {
+                console.log("Verification Report Request updated successfully");
+                toggleModal(false);
+            })
                 .catch(() => console.error("Failed to update Verification Report Request"));
         });
     }
