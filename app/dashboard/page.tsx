@@ -24,15 +24,19 @@ const Dashboard: React.FC = () => {
             <div className="topBar">
                 <div className='flex items-center justify-center'>
                     <Image src={AONLogo} alt="SAP AON" />
-                    <h1>Dashboard</h1>
+                    <h1 className='page-title'>AON DASHBOARD</h1>
+                    <input type="text" className='searchText' placeholder="Search..." />
                 </div>
                 <div className="search flex items-center justify-center">
-                    <input type="text" placeholder="Search..." />
-                    <Image src={userIcon} alt="Account" />
+                    <Image src={userIcon} alt="Account" className='mx-5' width={24} height={24} />
+                    <a href='/admin'>
+                    <Image src={panelSetupSvg} alt="Account" className='mx-5 panelSetupIcon' width={24} />
+                    </a>
+                    <Image src={logoutSvg} alt="Sign out" className='mx-5' width={24} />
                 </div>
             </div>
             <div className="container">
-                <nav className="nav">
+                {/* <nav className="nav">
                     <ul>
                         <li className="active"><Link href={'/addon'}><Image src={addOnLogo} alt="SLP ADDON" width={20} /> SLP ADDON</Link></li>
                         <li><a href="#"><Image src={sourcingLogo} alt="SOURCING" width={20} /> SOURCING</a></li>
@@ -47,8 +51,8 @@ const Dashboard: React.FC = () => {
                         <Image src={logoutSvg} alt="admin icon" />
                         <a href="#">Logout</a>
                     </div>
-                </nav>
-                <main className="main">
+                </nav> */}
+                <div className="main">
                     <section className="cardSection">
                         <div className="smallCard">
                             <Link href={'/addon'}>
@@ -178,7 +182,7 @@ const Dashboard: React.FC = () => {
                             </div>
                         </div>
                     </section>
-                </main>
+                </div>
             </div>
         </div>
     );

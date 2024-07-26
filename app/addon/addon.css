@@ -108,7 +108,6 @@
 .supplierGridContainer {
     background-color: #fff;
     height: calc(100% - 470px);
-    margin: 30px;
 }
 
 .supplierGridContainer .supplierGrid {
@@ -119,6 +118,91 @@
 .supplierGridContainer .filterContiner {
     display: flex;
     justify-content: space-between;
+}
+
+.supplierGridContainer .grid-filter{
+    position: relative;
+    display: inline;
+}
+
+.filter-container{
+    position:absolute;
+    border: 1px solid #CAD4E2;
+    padding: 10px;
+    display: inline;
+    left: 15px;
+    top: 35px;
+    background-color: #fff;
+    z-index: 9;
+    width: 375px;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.filter-container .filter-title p{
+    display: inline-flex;
+    font-size: 12px;
+}
+
+.filter-container .searchInput{
+    width: 250px !important;
+}
+
+.filter-container .filter-list{
+    margin: 5px;
+    padding: 0px 30px;
+    overflow-y: auto;
+    max-height: 150px;
+}
+
+.filter-container .filter-content{
+    display: none;
+}
+
+.filter-container .filter-item:has(.expand){
+    background-color: #97979714;
+}
+
+.filter-container .expand img{
+    transform: rotate(90deg);
+    transition: 0.3s;
+}
+
+.filter-container .filter-title.expand ~.filter-content{
+    display: block !important;
+}
+
+.filter-container .filter-list input{
+    margin: 0 5px;
+    margin: 0 20px 0 0;
+    cursor: pointer;
+}
+
+.filter-container .filter-list label{
+    font-size: 12px;
+}
+
+.filter-container .filter-action{
+    position: relative;
+    left: calc(100% - 170px);
+    display: inline;
+}
+
+.filter-container .filter-action .cancel{
+    border: 1px solid #5A5A5A;
+    padding: 5px;
+    border-radius: 4px;
+    margin: 10px;
+    width: 65px;
+}
+
+.filter-container .filter-action .apply{
+    padding: 5px;
+    border-radius: 4px;
+    margin: 10px;
+    background-color:#0298EC;
+    color: #fff;
+    width: 65px;
 }
 
 .supplierGridContainer .searchInput {

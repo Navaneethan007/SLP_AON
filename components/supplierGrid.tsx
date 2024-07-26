@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
+import SupplierFilter from "./supplierFilter";
 import filterSvg from '../public/filter.svg';
 import sortDownSvg from '../public/sort-down.svg';
 import downloadSvg from '../public/download.svg';
@@ -12,6 +13,7 @@ import { ISupplierErrorData } from "@/interfaces/ISupplierErrorData";
 export const SupplierGrid: React.FC<{ supplierData: ISupplierData[], gridType: string }> = ({ supplierData, gridType }) => {
     const [searchText, setSearchText] = React.useState<string>('');
     const [showErrorModal, setShowErrorModal] = React.useState(false);
+    const [showfilter, setShowFilter] = React.useState(false);
     const [errorData, setErrorData] = React.useState<ISupplierErrorData>();
     const [status, setStatus] = React.useState<string>(gridType);
     const cols = ["Select All", "Modified Date", "Created Date", "Supplier ID", "Supplier Name", "Commodity", "Region", "Buyer Name", "Buyer's Department", "Status", "Feedback/Error", "Decision"];
@@ -45,16 +47,20 @@ export const SupplierGrid: React.FC<{ supplierData: ISupplierData[], gridType: s
     }, [status]);
 
 
+
     return <div className="supplierGridContainer">
         <div className="filterContiner">
             <div>
                 <input name="searchInput" placeholder="Search" className="searchInput" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
-                <button className="sortBtn">
-                    <Image src={filterSvg} alt="filter icon" />
-                    Filter by
-                    <span className="filterCount">2</span>
-                    <Image src={sortDownSvg} alt="arrow-down" />
-                </button>
+                <div className="grid-filter">
+                    <button className="sortBtn" onClick={() => { setShowFilter(!showfilter) }}>
+                        <Image src={filterSvg} alt="filter icon" />
+                        Filter by
+                        <span className="filterCount">2</span>
+                        <Image src={sortDownSvg} alt="arrow-down" />
+                    </button>
+                    {showfilter && <SupplierFilter supplierData={supplierData} toggleFilter={setShowFilter}/>}
+                </div>
             </div>
             <div>
                 <button className="sortBtn">

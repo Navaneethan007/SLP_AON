@@ -113,7 +113,9 @@ const AdminPanel: React.FC = () => {
             <div className="admin-container">
                 <header className="header">
                     <Image src={aonLogo} alt="SAP AON" />
-                    <Image src={homeIcon} alt="Home" className='homeIcon' />
+                    <a href='/dashboard'>
+                        <Image src={homeIcon} alt="Home" className='homeIcon' />
+                    </a>
                 </header>
                 <h3 className="title">ADMIN PANEL SETUP FOR AON SERVICES</h3>
                 <div className="mainBox">
