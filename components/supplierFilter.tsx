@@ -3,76 +3,73 @@ import Image from "next/image";
 import chevRightSvg from '../public/chevron-right.svg';
 
 const SupplierFilter: React.FC<{ supplierData: ISupplierData[], toggleFilter: React.Dispatch<React.SetStateAction<boolean>> }> = ({ supplierData, toggleFilter }) => {
-
+    const filterTypes = ["Buyer Name", "Department", "Commodities", "Geography", "Type", "Status", "Feedback"];
     // document.addEventListener('click',(e)=>{
     //     e.stopPropagation();
     //     toggleFilter(false);
     // });
 
 
-    const toggleFilterItem = (e: any) => {
-        if (e.target.parentElement.parentElement.classList.contains('expand')) {
-            e.target.parentElement.parentElement.classList.remove('expand');
+    const toggleFilterItem = (index: Number) => {
+        let targetElement = document.querySelector(`#supplierName${index}`);
+        if (!targetElement) return;
+
+        if (targetElement.classList.contains('expand')) {
+            targetElement.classList.remove('expand');
         } else {
             document.querySelector('.expand')?.classList.remove('expand');
-            e.target.parentElement.parentElement.classList.add('expand');
+            targetElement.classList.add('expand');
         }
+    }
+
+    const getFilterData = (type: string) => {
+        let filterData: string[] = [];
+        switch (type) {
+            case 'Buyer Name':
+                filterData = supplierData.map((supplier) => supplier.buyerName);
+                break;
+            case "Department":
+                filterData = supplierData.map((supplier) => supplier.buyerDept);
+                break;
+            case "Commodities":
+                filterData = supplierData.map((supplier) => supplier.commodity);
+                break;
+            case "Geography":
+                filterData = supplierData.map((supplier) => supplier.region);
+                break;
+            case "Type":
+                filterData = supplierData.map((supplier) => supplier.type);
+                break;
+                break;
+            case "Status":
+                filterData = ['Approved', 'Denied'];
+                break;
+            case "Feedback":
+                filterData = ['Success', 'Error'];
+                break;
+        }
+
+        return filterData;
     }
 
     return (
         <div className="filter-container">
-            <div className="filter-item">
-                <div className="filter-title" id='supplierName'>
-                    <p>Supplier Name <Image src={chevRightSvg} alt="right-arrow" onClick={(e) => { toggleFilterItem(e) }} /></p>
+            {filterTypes.map((filter, i) =>
+            (<div className="filter-item">
+                <div className="filter-title" id={`supplierName${i}`} onClick={(e) => { toggleFilterItem(i) }}>
+                    <p>{filter}<Image id={`chev${i}`} src={chevRightSvg} alt="right-arrow" /></p>
                 </div>
-                <div className='filter-content'>
+                <div className='filter-content' id={`filter${i}`}>
                     <input className="search-item searchInput" placeholder="Search" />
                     <div className="filter-list">
-                        <div><input type="checkbox" />
-                            <label>Buyer 1</label></div>
-                        <div><input type="checkbox" />
-                            <label>Buyer 2</label></div>
-                        <div><input type="checkbox" />
-                            <label>Buyer 3</label></div>
-                        <div><input type="checkbox" />
-                            <label>Buyer 4</label></div>
-                            <div><input type="checkbox" />
-                            <label>Buyer 1</label></div>
-                        <div><input type="checkbox" />
-                            <label>Buyer 2</label></div>
-                        <div><input type="checkbox" />
-                            <label>Buyer 3</label></div>
-                        <div><input type="checkbox" />
-                            <label>Buyer 4</label></div>
+                        {getFilterData(filter).map((data, i) =>
+                            data ? <div><input id={`checkBox${i}`} type="checkbox" />
+                                <label htmlFor={`checkBox${i}`}>{data}</label>
+                            </div> : null)}
+                        {getFilterData(filter).length == 0 && <div>No Records Found</div>}
                     </div>
                 </div>
-            </div>
-            <div className="filter-item">
-                <div className="filter-title" id='supplierName'>
-                    <p>Buyer Name <Image src={chevRightSvg} alt="right-arrow" onClick={(e) => { toggleFilterItem(e) }} /></p>
-                </div>
-                <div className='filter-content'>
-                    <input className="search-item searchInput" placeholder="Search" />
-                    <div className="filter-list">
-                        <div><input type="checkbox" />
-                            <label>Buyer 1</label></div>
-                        <div><input type="checkbox" />
-                            <label>Buyer 2</label></div>
-                        <div><input type="checkbox" />
-                            <label>Buyer 3</label></div>
-                        <div><input type="checkbox" />
-                            <label>Buyer 4</label></div>
-                            <div><input type="checkbox" />
-                            <label>Buyer 1</label></div>
-                        <div><input type="checkbox" />
-                            <label>Buyer 2</label></div>
-                        <div><input type="checkbox" />
-                            <label>Buyer 3</label></div>
-                        <div><input type="checkbox" />
-                            <label>Buyer 4</label></div>
-                    </div>
-                </div>
-            </div>
+            </div>))}
             <div className="filter-action">
                 <button className="cancel" onClick={() => toggleFilter(false)}>Cancel</button>
                 <button className="apply">Apply</button>

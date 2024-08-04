@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SupplierGrid } from "@/components/supplierGrid";
 import Image from "next/image";
 import { useSearchParams } from 'next/navigation';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -17,7 +17,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+// import { Bar } from 'react-chartjs-2';
 import './addon.css';
 import AONLogo from '../../public/AON_logo.svg';
 import { SupplierRequestMapper } from "@/utils/supplierRequestMapper";
@@ -31,18 +31,18 @@ ChartJS.register(
     Legend
 );
 
-export const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top' as const,
-        },
-        title: {
-            display: true,
-            text: 'Supplier validation chart',
-        },
-    },
-};
+// export const options = {
+//     responsive: true,
+//     plugins: {
+//         legend: {
+//             position: 'top' as const,
+//         },
+//         title: {
+//             display: true,
+//             text: 'Supplier validation chart',
+//         },
+//     },
+// };
 
 
 export default function Home() {
@@ -50,23 +50,23 @@ export default function Home() {
     const type = searchParams.get('type') || "registration";
     const [fromDate, setFromDate] = React.useState<Dayjs | null>(null);
     const [toDate, setToDate] = React.useState<Dayjs | null>(null);
-    const labels = ['Date', '', '', '', ''];
+    // const labels = ['Date', '', '', '', ''];
     const [data, setData] = useState<ISupplierData[]>([]);
-    const chartData = {
-        labels,
-        datasets: [
-            {
-                label: 'Rejected',
-                data: [150, 0, 0, 0, 0],
-                backgroundColor: '#B40C01',
-            },
-            {
-                label: 'Approved',
-                data: [850, 0, 0, 0, 0],
-                backgroundColor: '#30B401',
-            }
-        ],
-    };
+    // const chartData = {
+    //     labels,
+    //     datasets: [
+    //         {
+    //             label: 'Rejected',
+    //             data: [150, 0, 0, 0, 0],
+    //             backgroundColor: '#B40C01',
+    //         },
+    //         {
+    //             label: 'Approved',
+    //             data: [850, 0, 0, 0, 0],
+    //             backgroundColor: '#30B401',
+    //         }
+    //     ],
+    // };
 
     React.useEffect(() => {
         fetch('https://aonapi.azurewebsites.net/SupplierApprovalRequest/GetAllSupplierApprovalRequest')
@@ -119,7 +119,7 @@ export default function Home() {
                     <div className="rejected">150</div>
                 </div>
                 <div className="graph">
-                    <Bar options={options} data={chartData} />
+                    {/* <Bar options={options} data={chartData} /> */}
                 </div>
             </div>
             <SupplierGrid supplierData={data} gridType={type} />

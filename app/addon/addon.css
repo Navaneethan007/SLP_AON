@@ -107,7 +107,7 @@
 
 .supplierGridContainer {
     background-color: #fff;
-    height: calc(100% - 470px);
+    height: calc(100% - 420px);
 }
 
 .supplierGridContainer .supplierGrid {
@@ -168,6 +168,15 @@
     transition: 0.3s;
 }
 
+.filter-container .filter-title{
+    cursor: pointer;
+    padding: 3px 0;
+}
+
+.filter-container .filter-title img{
+    margin-left: 5px;
+}
+
 .filter-container .filter-title.expand ~.filter-content{
     display: block !important;
 }
@@ -180,6 +189,9 @@
 
 .filter-container .filter-list label{
     font-size: 12px;
+    position: relative;
+    bottom: 3px;
+    cursor: pointer;
 }
 
 .filter-container .filter-action{
@@ -274,11 +286,12 @@
 
 .submitBtn button {
     position: relative;
-    left: calc(100% - 160px);
+    left: calc(100% - 130px);
     padding: 10px 30px;
     background: #DBDBDB;
     border-radius: 6px;
     margin: 10px 0;
+    top: 20px;
 }
 
 .supplierGrid .rejected {
