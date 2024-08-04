@@ -55,7 +55,7 @@ const SupplierFilter: React.FC<{ supplierData: ISupplierData[], toggleFilter: Re
     return (
         <div className="filter-container">
             {filterTypes.map((filter, i) =>
-            (<div className="filter-item">
+            (<div className="filter-item" key={`filter${i}`}>
                 <div className="filter-title" id={`supplierName${i}`} onClick={(e) => { toggleFilterItem(i) }}>
                     <p>{filter}<Image id={`chev${i}`} src={chevRightSvg} alt="right-arrow" /></p>
                 </div>
@@ -63,7 +63,7 @@ const SupplierFilter: React.FC<{ supplierData: ISupplierData[], toggleFilter: Re
                     <input className="search-item searchInput" placeholder="Search" />
                     <div className="filter-list">
                         {getFilterData(filter).map((data, i) =>
-                            data ? <div><input id={`checkBox${i}`} type="checkbox" />
+                            data ? <div key={`filter-item${i}`}><input id={`checkBox${i}`} type="checkbox" />
                                 <label htmlFor={`checkBox${i}`}>{data}</label>
                             </div> : null)}
                         {getFilterData(filter).length == 0 && <div>No Records Found</div>}
