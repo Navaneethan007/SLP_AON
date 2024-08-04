@@ -101,6 +101,7 @@ body {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  white-space: nowrap;
 }
 
 .horizontalLine {
@@ -135,7 +136,11 @@ body {
   color: #0382CA;
   cursor: pointer;
 }
-
+.text.link {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
 .queryBox {
   border: 1px solid #0298EC;
   padding: 10px;
@@ -257,6 +262,7 @@ body {
   width: 20px;  
   height: 20px; 
   vertical-align: middle; 
+  margin-right: 5px;
 }
 
 .buttonWrapper {
