@@ -82,13 +82,13 @@ export const SupplierGrid: React.FC<{ supplierData: ISupplierData[], gridType: s
                     <thead className="text-xs border-b">
                         <tr>
                             {tableCols.map((col, i) =>
-                                <th scope="col" className="px-3 py-3">
+                                <th key={`check${i}`} scope="col" className="px-3 py-3">
                                     {i == 0 && <input type="checkbox" onChange={(e) => { selectAll(e.target.checked) }} />}{col}
                                 </th>)}
                         </tr>
                     </thead>
                     <tbody>
-                        {supplierData.map((data) => <tr className="bg-white border-b">
+                        {supplierData.map((data,i) => <tr key={`row${i}`} className="bg-white border-b">
                             <td className="px-3 py-3 text-center">
                                 <input type="checkbox" />
                             </td>
