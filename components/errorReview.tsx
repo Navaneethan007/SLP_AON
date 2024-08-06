@@ -102,6 +102,48 @@ export const ErrorReview: React.FC<{ errorData: ISupplierErrorData | undefined, 
                                 <textarea value={errorData?.panReport?.approvalComments} onChange={(e) => updateApprovalRequest(errorData?.panReport, null, e.target.value)} />
                             </td>
                         </tr>
+                        <tr>
+                            <td className="px-3 py-3">
+                                Duplicate check against ERP data
+                            </td>
+                            <td className="px-3 py-3">
+                                <label className="custom-radio green">
+                                    <input type="radio" name="panDecision" value="approve" onClick={() => updateApprovalRequest(errorData?.panReport, true, "")} />
+                                    <i></i>Approve
+                                </label>
+                                <label className="custom-radio red">
+                                    <input type="radio" name="panDecision" value="reject" onClick={() => updateApprovalRequest(errorData?.panReport, false, "")} />
+                                    <i></i>Reject
+                                </label>
+                            </td>
+                            <td className="px-3 py-3 errorText">
+                                <div>Duplicate found - GST + PAN combination exist</div>
+                            </td>
+                            <td className="px-3 py-3">
+                                <textarea value={errorData?.panReport?.approvalComments} onChange={(e) => updateApprovalRequest(errorData?.panReport, null, e.target.value)} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="px-3 py-3">
+                                Chequeue validation - leaf
+                            </td>
+                            <td className="px-3 py-3">
+                                <label className="custom-radio green">
+                                    <input type="radio" name="panDecision" value="approve" onClick={() => updateApprovalRequest(errorData?.panReport, true, "")} />
+                                    <i></i>Approve
+                                </label>
+                                <label className="custom-radio red">
+                                    <input type="radio" name="panDecision" value="reject" onClick={() => updateApprovalRequest(errorData?.panReport, false, "")} />
+                                    <i></i>Reject
+                                </label>
+                            </td>
+                            <td className="px-3 py-3 errorText">
+                                <div>Account number mismatching with the field</div>
+                            </td>
+                            <td className="px-3 py-3">
+                                <textarea value={errorData?.panReport?.approvalComments} onChange={(e) => updateApprovalRequest(errorData?.panReport, null, e.target.value)} />
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <div className="footer">

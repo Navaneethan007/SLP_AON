@@ -2,13 +2,9 @@ import React from "react";
 import Image from "next/image";
 import chevRightSvg from '../public/chevron-right.svg';
 
-const SupplierFilter: React.FC<{ supplierData: ISupplierData[], toggleFilter: React.Dispatch<React.SetStateAction<boolean>> }> = ({ supplierData, toggleFilter }) => {
+const SupplierFilter: React.FC<{ supplierData: ISupplierData[], toggleFilter: React.Dispatch<React.SetStateAction<boolean>>, filterSupplier: (filteredData: ISupplierData[]) => void }> = ({ supplierData, toggleFilter, filterSupplier }) => {
     const filterTypes = ["Buyer Name", "Department", "Commodities", "Geography", "Type", "Status", "Feedback"];
-    // document.addEventListener('click',(e)=>{
-    //     e.stopPropagation();
-    //     toggleFilter(false);
-    // });
-
+    const filterValue: any = {};
 
     const toggleFilterItem = (index: Number) => {
         let targetElement = document.querySelector(`#supplierName${index}`);
@@ -49,7 +45,47 @@ const SupplierFilter: React.FC<{ supplierData: ISupplierData[], toggleFilter: Re
                 break;
         }
 
-        return filterData;
+        return Array.from(new Set(filterData));
+    }
+
+    const selectFilter = (e: React.ChangeEvent<HTMLInputElement>, filter: string, data: string) => {
+        if (!filterValue[filter]) filterValue[filter] = [];
+
+        if (e.target.checked && filterValue[filter].indexOf(data) === -1) {
+            filterValue[filter].push(data);
+        } else {
+            filterValue[filter].splice(filterValue[filter].indexOf(data), 1);
+        }
+    }
+
+    const applyFilter = () => {
+        let filteredSupplier: ISupplierData[] = supplierData;
+        for (let x in filterValue) {
+            switch (x) {
+                case "Buyer Name":
+                    filteredSupplier = filteredSupplier.filter((data) => filterValue[x].indexOf(data.buyerName) >= 0);
+                    break;
+                case "Department":
+                    filteredSupplier = filteredSupplier.filter((data) => filterValue[x].indexOf(data.buyerDept) >= 0);
+                    break;
+                case "Commodities":
+                    filteredSupplier = filteredSupplier.filter((data) => filterValue[x].indexOf(data.commodity) >= 0);
+                    break;
+                case "Geography":
+                    filteredSupplier = filteredSupplier.filter((data) => filterValue[x].indexOf(data.region) >= 0);
+                    break;
+                case "Type":
+                    filteredSupplier = filteredSupplier.filter((data) => filterValue[x].indexOf(data.type) >= 0);
+                    break;
+                case "Status":
+                    filteredSupplier = filteredSupplier.filter((data) => filterValue[x].indexOf(data.status) >= 0);
+                    break;
+                case "Feedback":
+                    filteredSupplier = filteredSupplier.filter((data) => filterValue[x].indexOf(data.feedback ? 'Success' : 'Error') >= 0);
+                    break;
+            }
+        }
+        filterSupplier(filteredSupplier);
     }
 
     return (
@@ -63,7 +99,7 @@ const SupplierFilter: React.FC<{ supplierData: ISupplierData[], toggleFilter: Re
                     <input className="search-item searchInput" placeholder="Search" />
                     <div className="filter-list">
                         {getFilterData(filter).map((data, i) =>
-                            data ? <div key={`filter-item${i}`}><input id={`checkBox${i}`} type="checkbox" />
+                            data ? <div key={`filter-item${i}`}><input id={`checkBox${i}`} type="checkbox" onChange={(e) => selectFilter(e, filter, data)} />
                                 <label htmlFor={`checkBox${i}`}>{data}</label>
                             </div> : null)}
                         {getFilterData(filter).length == 0 && <div>No Records Found</div>}
@@ -72,7 +108,7 @@ const SupplierFilter: React.FC<{ supplierData: ISupplierData[], toggleFilter: Re
             </div>))}
             <div className="filter-action">
                 <button className="cancel" onClick={() => toggleFilter(false)}>Cancel</button>
-                <button className="apply">Apply</button>
+                <button className="apply" onClick={() => applyFilter()}>Apply</button>
             </div>
         </div>
     )

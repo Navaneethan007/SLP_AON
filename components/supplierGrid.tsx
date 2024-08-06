@@ -12,12 +12,14 @@ import { ISupplierErrorData } from "@/interfaces/ISupplierErrorData";
 
 export const SupplierGrid: React.FC<{ supplierData: ISupplierData[], gridType: string }> = ({ supplierData, gridType }) => {
     const [searchText, setSearchText] = React.useState<string>('');
+    const [tempSupplierData, setTempSupplierData] = React.useState<ISupplierData[]>();
     const [showErrorModal, setShowErrorModal] = React.useState(false);
     const [showfilter, setShowFilter] = React.useState(false);
     const [errorData, setErrorData] = React.useState<ISupplierErrorData>();
     const [status, setStatus] = React.useState<string>(gridType);
     const cols = ["Select All", "Modified Date", "Created Date", "Supplier ID", "Supplier Name", "Commodity", "Region", "Buyer Name", "Buyer's Department", "Status", "Feedback/Error", "Decision"];
     const [tableCols, setTableCols] = React.useState<string[]>(cols);
+    let supplierAction: any[] = [];
 
     const selectAll = (isSelected: boolean) => {
         const checkbox = document.querySelectorAll('table tbody tr input[type="checkbox"]') as NodeListOf<HTMLInputElement>;
@@ -35,6 +37,27 @@ export const SupplierGrid: React.FC<{ supplierData: ISupplierData[], gridType: s
         }
     }
 
+    const applyFilter = (filteredData: ISupplierData[]) => {
+        setTempSupplierData(filteredData);
+    }
+
+    const updateAction = (e: React.ChangeEvent<HTMLSelectElement>, data: ISupplierData) => {
+        let isApproved = e.target.value == "Approve";
+        supplierAction.push({ taskId: data.taskID, isApprove: isApproved })
+    }
+
+    const submitSupplierData = () => {
+        supplierAction.forEach((action)=>{
+            fetch(`https://aonapi.azurewebsites.net/SupplierApprovalRequest/ApproveDeny?taskId=${action.taskId}&isApprove=${action.isApprove}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' }
+            }).then(() => {
+                console.log("Supplier Request updated successfully");
+            })
+                .catch(() => console.error("Failed to update Supplier Report Approval Request"));
+        })
+    }
+
     useEffect(() => {
         const temp = [...cols];
         if (status == "request") {
@@ -46,9 +69,13 @@ export const SupplierGrid: React.FC<{ supplierData: ISupplierData[], gridType: s
         }
     }, [status]);
 
+    useEffect(() => {
+        setTempSupplierData(supplierData);
+    }, [supplierData])
 
 
-    return <div className="supplierGridContainer">
+
+    return <><div className="supplierGridContainer">
         <div className="filterContiner">
             <div>
                 <input name="searchInput" placeholder="Search" className="searchInput" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
@@ -59,7 +86,7 @@ export const SupplierGrid: React.FC<{ supplierData: ISupplierData[], gridType: s
                         <span className="filterCount">2</span>
                         <Image src={sortDownSvg} alt="arrow-down" />
                     </button>
-                    {showfilter && <SupplierFilter supplierData={supplierData} toggleFilter={setShowFilter}/>}
+                    {showfilter && <SupplierFilter supplierData={supplierData} toggleFilter={setShowFilter} filterSupplier={applyFilter} />}
                 </div>
             </div>
             <div>
@@ -88,7 +115,7 @@ export const SupplierGrid: React.FC<{ supplierData: ISupplierData[], gridType: s
                         </tr>
                     </thead>
                     <tbody>
-                        {supplierData.map((data,i) => <tr key={`row${i}`} className="bg-white border-b">
+                        {tempSupplierData && tempSupplierData.map((data, i) => <tr key={`row${i}`} className="bg-white border-b">
                             <td className="px-3 py-3 text-center">
                                 <input type="checkbox" />
                             </td>
@@ -128,7 +155,7 @@ export const SupplierGrid: React.FC<{ supplierData: ISupplierData[], gridType: s
                                 <span className="ml-1 relative top-1"><Image src={data.feedback ? errorSvg : rightCapSvg} alt='action' /></span>
                             </td>
                             <td className="px-3 py-3">
-                                <select>
+                                <select onChange={(e) => { updateAction(e, data) }}>
                                     <option>No Action</option>
                                     <option>Approve</option>
                                     <option>Reject</option>
@@ -141,4 +168,7 @@ export const SupplierGrid: React.FC<{ supplierData: ISupplierData[], gridType: s
             </div>
         </div>
     </div>
+        <div className="submitBtn">
+            <button onClick={submitSupplierData}>Submit</button>
+        </div></>
 }

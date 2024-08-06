@@ -5,11 +5,10 @@ import Modal from '@mui/material/Modal';
 export default function ModalDialog({ content, toggleModal }: { content: React.ReactElement, toggleModal: React.Dispatch<React.SetStateAction<boolean>> }) {
     const style = {
         position: 'absolute' as 'absolute',
-        top: '100%',
-        left: '100%',
+        top: '50%',
+        left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: '100%',
-        maxWidth: '100%',
+        width: 400,
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
